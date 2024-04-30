@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% load static %}
+<div class="container">
+  <link rel="stylesheet" href="{% static 'polls/style.css' %}" />
+
+  {% block title %}polls{% endblock %} {% block content %} {% if latest_question_list %}
+  <ul>
+    {% for question in latest_question_list %}
+    <li>
+      <a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
+      <p>fecha: {{ question.pub_date }}</p>
+      <p>creado en :{{ question.created_at }}</p>
+      <p>actualizado el :{{ question.update_date }}</p>
+      <p>categoria : {{ question.category }}</p>
+      <p>persona : {{ question.pollster }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No polls are available.</p>
+</div>
+{% endif %} {% endblock %}
